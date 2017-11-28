@@ -280,7 +280,7 @@ END
 // "procedure_alias"                          : Any string (friendly name for you) - used in log (so you don't need to use your real procedure ID)
 // ---
 
-#define EXTDB_PS_POOL [ \
+#define EXTDB_PR_POOL [ \
    [1,"myProtocol111","RemoveOldVG","VG Cleanup"]
 ]
 
