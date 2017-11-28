@@ -42,7 +42,9 @@
   - [How to prepare `@extDB` configuration files?](#how-to-prepare-extdb-configuration-files)
   - [How to prepare `dayz_server` files?](#how-to-prepare-dayz_server-files)
   - [Putting all together: Virtual Garage Case Study](#putting-all-together-virtual-garage-case-study)
-- [Tips](#tips)
+- [TIPS](#tips)
+  - [TIP 01: Use power of stored root path](#tip-01-use-power-of-stored-root-path)
+  - [TIP 02: Use debug options](#tip-02-use-debug-options)
 - [Changelog](#changelog)
 
 <!-- /MarkdownTOC -->
@@ -72,7 +74,7 @@ _When you see **[number]** in the text bellow, check the [number] in this visual
 ## Installation Checklist for SERVER OWNERS
 
 - [x] [Visual Studio C++ Redistributable 2015][visualredis] **[1]** is available for server.
-- [x] Original `tbbmalloc.dll` library **[2]** was replaced by the one provided in this distribution and was copied into Arma server root. ([Which `tbbmalloc.dll` do you mean?](arma_server_root/)?)
+- [x] Original `tbbmalloc.dll` library **[2]** was replaced by the one provided in this distribution and was copied into Arma server root. ([Which `tbbmalloc.dll` do you mean](arma_server_root/)?)
 - [x] `@extDB` addon **[5]** is in the Arma server root. ([Where is `@extDB` addon](arma_server_root/)?)
 - [x] `@extDB` addon was added to **launcher parameters** ( i.e. `@extDB;@DayZ_Epoch;@DayZ_Epoch_Server` for Dayz Epoch, or `@extDB;@DayzOverwatch;@DayZ_Epoch;@DayZ_Epoch_Server` for Overpoch).<br> **Do NOT use `@extDB3` folder name (just `@extDB`), or dayz launcher will not recognize the addon and your server will NOT be listed!** ([Where can I test if DZLauncher is able to recognize my server](http://dz.launcher.eu/check)?)
 - [x] Addon using `@extDB` was configured - **Follow instructions provided by addon author!**
@@ -225,7 +227,7 @@ SQL1_INPUTS = 1
 // Note: You can define protocol for already existing database (scenario: you didn't create new database, just new table for existing one)
 ```
 
-3. Optional: _"Enable ability to receive exclusive log"_ - define and include session `LOG` protocol - [`EXTDB_LG_POOL`][EXTDB-cfg-admin] (**[12]/[16]**)
+3. Optional: _"Enable ability to receive exclusive log"_ - define and include session [`LOG` protocol](preview/addon_exclusive_logfile_example.txt) - [`EXTDB_LG_POOL`][EXTDB-cfg-admin] (**[12]/[16]**)
 
 ```hpp
 // ["database_cfg_name","unique_LOG_procol_name","unique_logfile_name"]
@@ -470,18 +472,78 @@ call compile preprocessFileLineNumbers "\z\addons\dayz_server\extDB\EXTDB_init.s
 ---
 
 <a name="tips"></a>
-## Tips
+## TIPS
 
-**@ todo**
+<a name="tip-01-use-power-of-stored-root-path"></a>
+### TIP 01: Use power of stored root path
+
+> You can move [**`day_server\extDB`**](arma_server_root/@DayZ_Epoch_Server/addons/dayz_server/extDB/) wherever you like without changing paths.
+
+Root path is autodiscovered on init and stored into **`EXTDBROOT`** variable. If you will need to add your custom helper functions - all you need to do is just use it (see [**`EXTDB_init.sqf`**](arma_server_root/@DayZ_Epoch_Server/addons/dayz_server/extDB/EXTDB_init.sqf)).
+
+<a name="tip-02-use-debug-options"></a>
+### TIP 02: Use debug options
+
+> Before you push your addon to live server, stay a little while with your test server and get the most info you can get:
+
++ **Test your protocols, queries etc. using console - no need to go online with Arma!**
+  + [x] Open [**`debug_files`**](debug_files/) folder and copy to your **local arma server root**:
+    + [x] **`extdb3-conf.ini`:** Make sure it already has correct info.
+    + [x] **`extDB3.dll`**
+    + [x] **`extDB3-test.exe`**
+  + [x] Replace original **`tbbmalloc.dll`** library **[2]** in **local arma server root** by [the one provided in this distribution](arma_server_root/).
+  + [x] Open [**`arma_server_root/@extDB`**](arma_server_root/@extDB/) folder and, again, copy whole folder **`sql_custom`** to your **local arma server root**:
+    + [x] Open it in your editor for later - you will write your stored procedures in there (and test them in console...)
+  + [x] That's it. Now you can start console from your local arma server root and run **`extDB3-test.exe`**.
+    + [x] **Important:**
+      + [x] Remember: as a minimum, you need to connect to database and create session protocol to be able to talk to database.
+      + [x] When you're testing, you will need to reset connection from time to time (using system command **`"9:RESET"`** - mostly when you change your SQL code inside **`sql_custom`** folder) - Do not forget set **`Allow Reset = true`** in **`extdb3-conf.ini`** (We are still in arma server root, right?).
+      + [x] As a start, you can check [**`this debug console system commands test file`**](preview/SYSTEM_debug_console_test_examplet.txt) and [**`this general call types info file`**](preview/GENERAL_call_types.txt)
++ **Get trace level debug info in live game using debug DLL**
+  + [x] Copy **`extDB3.dll`** from [**`debug_files`**](debug_files/) and replace the original one in [**`@extDB`**](arma_server_root/@extDB/).
+  + [x] [**`See the log example`**.](preview/debug_dll_log_example.txt).
+  + [x] **Important:** do not use this dll on your live server (there is a performace hit)...
+
++ **Get detailed info about `extDB` engine initialization**
+  + [x] If you wish enable handy debug RPT info (...or on screen debug info where applicable), make sure these definitions are uncommented:
+    + [x] **`#define __ROOTDBG__`** - prints autodiscovered addon root path to RPT ([**`Where is it?`**](arma_server_root/@DayZ_Epoch_Server/addons/dayz_server/extDB/core/helpers/EXTDB_cfg_format.hpp))
+    + [x] **`#define __EXTDBGEN__`** - prints debug info to RPT (results, params errors etc.) ([**`Where is it?`**](arma_server_root/@DayZ_Epoch_Server/addons/dayz_server/extDB/core/helpers/EXTDB_cfg_format.hpp))
+    + [x] **`#define __EXTDBINT__`** - prints debug info to RPT + on screen info (systemChat) ([**`Where is it?`**](arma_server_root/@DayZ_Epoch_Server/addons/dayz_server/extDB/core/helpers/EXTDB_fnc_callDebugLog.sqf))
+  + [x] See bellow how RPT log looks like when **`#define __ROOTDBG__`** and **`#define __EXTDBGEN__`** are enabled:<br>**Scenario:** We are initiating `2x databases`; `3x session protocols`; `2x log protocols` (no error mode)
+  + [x] [**`See more debug outputs in different scenarios`**](preview/RPT_log_info_onInit_examples.txt)
+
+```ini
+// ---------------------------------------------------------------------------
+// RPT log:
+10:47:53 "=== [EXTDB, [EXTDB_init]] || DEBUG :: [EXTDB_fnc_init_ROOTer] >> Addon relative root >> [z\addons\dayz_server\extDB]"
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> Connection procedure initiated..."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> DB pool processing started..."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Connection to database [0-myCodeNameForDB1] set."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Connection to database [1-myCodeNameForDB2] set."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> PS pool protocol started..."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Session protocol [0-Garage] set."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Session protocol [1-protocolAlias2] set."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Session protocol [2-protocolAlias3] set."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> LOG pool protocol started..."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> LOG protocol [0-VIRGA] set."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> LOG protocol [1-NEWAD] set."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Locking API..."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Result: [2/2] databas(es) connected [3/3] session protocol(s) set [2/2] log protocol(s) set."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Connection procedure finished in [0.275002 seconds] with status [1]."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_runDBCleanup] >> INFO >> DB cleaning procedure initiated..."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_runDBCleanup] >> INFO >> Cleaning procedure [0-VG Cleanup] fired..."
+10:47:53 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_runDBCleanup] >> INFO >> Cleaning procedure finished in [0 seconds] with status [true]."
+```
 
 ---
 
 <a name="changelog"></a>
 ## Changelog
 
-| Date         | Version | Description                                                                                           |
-| :---         | :---    | :---                                                                                                  |
-| [2017-11-23] | v0.1    | Initial release                                                                                       |
+| Date         | Version | Description                                                                                                     |
+| :---         | :---    | :---                                                                                                            |
+| [2017-11-23] | v0.1    | Initial release                                                                                                 |
+| [2017-11-28] | v0.2    | Added debug src files;<br>TIP 01: 'Use power of stored root path'; TIP 02: 'Use debug options' - incl. examples |
 
 ---
 

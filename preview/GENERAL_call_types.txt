@@ -1,0 +1,49 @@
+*******************************************************************************************
+:: extDB3 author: @torndeco
+:: Official addon homepage: https://bitbucket.org/torndeco/extdb3/wiki/Home
+:: Oficial docs src: https://bitbucket.org/torndeco/extdb3/wiki/extDB3%20-%20General
+:: Read licence info!
+*******************************************************************************************
+:: This excerpt was created by @iben
+:: last update [2017-11-21]
+*******************************************************************************************
+
+*******************************************************************************************
+*                                    SYSTEM TOC                                           *
+*******************************************************************************************
+
+*******************************************************************************************
+*                               GENERAL MESSAGE FORMAT                                    *
+*******************************************************************************************
+
+  CALL_TYPE:PROTOCOL_NAME:DATA
+
+*******************************************************************************************
+*                                      CALL_TYPE                                          *
+*******************************************************************************************
+
+  ++ 0 = Sync
+  ++ 1 = ASync (Doesnt save/return results, use for updating DB Values)
+  ++ 2 = ASync + Save (Returns ID, for use with 5)
+
+  ++ 4 = Get (Retrieve Single Part Message)
+  ++ 5 = Get (Retrieves Multi-Msg Message)
+
+  ++ 9 = System Commands (see 'SYSTEM_debug_console_text.txt' file)
+
+*******************************************************************************************
+*                                      CALL_TYPE                                          *
+*******************************************************************************************
+
+  -----------------------------------------------------------------------------------------
+  ++ Returned message formats
+  [TYPE]
+  [TYPE,DATA]
+
+  -----------------------------------------------------------------------------------------
+  ++ Returned message types
+  0=ERROR                    (When Error encounter, data = basic info)
+  1=OK
+  2=ID                       (ID = ID for ASYNC / Multi-part Message)
+  3=WAIT                     (WAIT, means extDB hasn't got result yet)
+  5=MULTIMSG                 (When you call 4:, it will return [5] if message is Multi-part)

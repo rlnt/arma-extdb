@@ -1,0 +1,197 @@
+[10:47:53:234683 +01:00] [Thread 11848] extDB3: Input from Server: 9:VERSION
+[10:47:53:235183 +01:00] [Thread 11848] extDB3: Output to Server: 1.032
+[10:47:53:235683 +01:00] [Thread 11848] extDB3: Input from Server: 9:ADD_DATABASE:vehicle_manager
+[10:47:53:284689 +01:00] [Thread 11848] extDB3: Output to Server: [1]
+[10:47:53:285690 +01:00] [Thread 11848] extDB3: Input from Server: 9:ADD_DATABASE:new_addon_db
+[10:47:53:288690 +01:00] [Thread 11848] extDB3: Output to Server: [1]
+[10:47:53:306192 +01:00] [Thread 11848] extDB3: Input from Server: 9:ADD_DATABASE_PROTOCOL:vehicle_manager:SQL_CUSTOM:VGAR:vg-conf.ini
+[10:47:53:306692 +01:00] [Thread 11848] extDB3: Output to Server: [1]
+[10:47:53:307192 +01:00] [Thread 11848] extDB3: Input from Server: 9:ADD_DATABASE_PROTOCOL:vehicle_manager:SQL_CUSTOM:ADDON2:addon2-conf.ini
+[10:47:53:307692 +01:00] [Thread 11848] extDB3: Output to Server: [1]
+[10:47:53:308192 +01:00] [Thread 11848] extDB3: Input from Server: 9:ADD_DATABASE_PROTOCOL:new_addon_db:SQL_CUSTOM:ADDON3:addon3-conf.ini
+[10:47:53:308192 +01:00] [Thread 11848] extDB3: Output to Server: [1]
+[10:47:53:325695 +01:00] [Thread 11848] extDB3: Input from Server: 9:ADD_PROTOCOL:LOG:VIRGA:virtual_garage
+[10:47:53:326195 +01:00] [Thread 11848] extDB3: Output to Server: [1]
+[10:47:53:326695 +01:00] [Thread 11848] extDB3: Input from Server: 9:ADD_PROTOCOL:LOG:NEWAD:new_addon_logfile
+[10:47:53:327195 +01:00] [Thread 11848] extDB3: Output to Server: [1]
+[10:47:53:345197 +01:00] [Thread 11848] extDB3: Input from Server: 9:LOCK
+[10:47:53:345197 +01:00] [Thread 11848] extDB3: Locked
+[10:47:53:345197 +01:00] [Thread 11848] extDB3: Output to Server: [1]
+[10:47:53:347197 +01:00] [Thread 11848] extDB3: Input from Server: 1:VGAR:RemoveOldVG
+[10:47:53:347197 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:47:53:347197 +01:00] [Thread 11772] extDB3: SQL_CUSTOM: Trace: UniqueID: 1 Input: RemoveOldVG
+[10:47:53:348197 +01:00] [Thread 11772] extDB3: SQL_CUSTOM: Trace: Result: [1,[]]
+[10:48:50:645473 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:queryVehicle:76561198276524693
+[10:48:50:645473 +01:00] [Thread 11848] extDB3: Output to Server: [2,"100"]
+[10:48:50:645473 +01:00] [Thread 11772] extDB3: SQL_CUSTOM: Trace: UniqueID: 100 Input: queryVehicle:76561198276524693
+[10:48:50:662976 +01:00] [Thread 11772] extDB3: SQL_CUSTOM: Trace: Result: [1,[]]
+[10:48:50:666476 +01:00] [Thread 11848] extDB3: Input from Server: 4:100
+[10:48:50:666976 +01:00] [Thread 11848] extDB3: Output to Server: [1,[]]
+[10:48:53:374320 +01:00] [Thread 11848] extDB3: Input from Server: 9:LOCAL_TIME
+[10:48:53:374820 +01:00] [Thread 11848] extDB3: Output to Server: [1,[2017,11,22,10,48,53]]
+[10:48:53:376320 +01:00] [Thread 11848] extDB3: Input from Server: 1:VGAR:storeVehicle:76561198276524693:iben:Mi-17 (Civilian):Mi17_Civilian_DZ:22-11-2017:9872:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:48:53:376320 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:48:53:376320 +01:00] [Thread 11772] extDB3: SQL_CUSTOM: Trace: UniqueID: 1 Input: storeVehicle:76561198276524693:iben:Mi-17 (Civilian):Mi17_Civilian_DZ:22-11-2017:9872:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:48:53:376320 +01:00] [Thread 11848] extDB3: Input from Server: 1:VIRGA:GARAGE: iben (76561198276524693) stored Mi17_Civilian_DZ @011039 [1108.31,11433.3,0.00161743]
+[10:48:53:376320 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:48:53:379320 +01:00] [Thread 11772] extDB3: SQL_CUSTOM: Trace: Result: [1,[]]
+[10:49:11:535626 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:queryVehicle:76561198276524693
+[10:49:11:535626 +01:00] [Thread 11848] extDB3: Output to Server: [2,"101"]
+[10:49:11:535626 +01:00] [Thread 11772] extDB3: SQL_CUSTOM: Trace: UniqueID: 101 Input: queryVehicle:76561198276524693
+[10:49:11:549128 +01:00] [Thread 11772] extDB3: SQL_CUSTOM: Trace: Result: [1,[[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"]]]
+[10:49:11:555629 +01:00] [Thread 11848] extDB3: Input from Server: 4:101
+[10:49:11:555629 +01:00] [Thread 11848] extDB3: Output to Server: [1,[[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"]]]
+[10:49:13:757408 +01:00] [Thread 11848] extDB3: Input from Server: 9:LOCAL_TIME
+[10:49:13:757408 +01:00] [Thread 11848] extDB3: Output to Server: [1,[2017,11,22,10,49,13]]
+[10:49:13:759408 +01:00] [Thread 11848] extDB3: Input from Server: 1:VGAR:storeVehicle:76561198276524693:iben:UAZ:UAZ_INS:22-11-2017:9275:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:49:13:759408 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:49:13:759408 +01:00] [Thread 11772] extDB3: SQL_CUSTOM: Trace: UniqueID: 1 Input: storeVehicle:76561198276524693:iben:UAZ:UAZ_INS:22-11-2017:9275:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:49:13:759908 +01:00] [Thread 11848] extDB3: Input from Server: 1:VIRGA:GARAGE: iben (76561198276524693) stored UAZ_INS @011039 [1108.89,11433.3,0.00170898]
+[10:49:13:759908 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:49:13:767909 +01:00] [Thread 11772] extDB3: SQL_CUSTOM: Trace: Result: [1,[]]
+[10:49:28:477277 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:queryVehicle:76561198276524693
+[10:49:28:477277 +01:00] [Thread 11848] extDB3: Output to Server: [2,"102"]
+[10:49:28:477277 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 102 Input: queryVehicle:76561198276524693
+[10:49:28:484278 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"]]]
+[10:49:28:495780 +01:00] [Thread 11848] extDB3: Input from Server: 4:102
+[10:49:28:495780 +01:00] [Thread 11848] extDB3: Output to Server: [1,[[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"]]]
+[10:49:30:978595 +01:00] [Thread 11848] extDB3: Input from Server: 9:LOCAL_TIME
+[10:49:30:978595 +01:00] [Thread 11848] extDB3: Output to Server: [1,[2017,11,22,10,49,30]]
+[10:49:30:980095 +01:00] [Thread 11848] extDB3: Input from Server: 1:VGAR:storeVehicle:76561198276524693:iben:Nissan 350z (Silver):350z_silver:22-11-2017:7196:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:49:30:980095 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:49:30:980095 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 1 Input: storeVehicle:76561198276524693:iben:Nissan 350z (Silver):350z_silver:22-11-2017:7196:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:49:30:980095 +01:00] [Thread 11848] extDB3: Input from Server: 1:VIRGA:GARAGE: iben (76561198276524693) stored 350z_silver @011039 [1109.31,11433,0.0017395]
+[10:49:30:980095 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:49:30:987096 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[]]
+[10:49:46:505567 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:queryVehicle:76561198276524693
+[10:49:46:505567 +01:00] [Thread 11848] extDB3: Output to Server: [2,"103"]
+[10:49:46:506067 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 103 Input: queryVehicle:76561198276524693
+[10:49:46:512067 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"]]]
+[10:49:46:524569 +01:00] [Thread 11848] extDB3: Input from Server: 4:103
+[10:49:46:524569 +01:00] [Thread 11848] extDB3: Output to Server: [1,[[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"]]]
+[10:49:48:749852 +01:00] [Thread 11848] extDB3: Input from Server: 9:LOCAL_TIME
+[10:49:48:749852 +01:00] [Thread 11848] extDB3: Output to Server: [1,[2017,11,22,10,49,48]]
+[10:49:48:751352 +01:00] [Thread 11848] extDB3: Input from Server: 1:VGAR:storeVehicle:76561198276524693:iben:Vodnik (Ambulance):GAZ_Vodnik_MedEvac:22-11-2017:2485:[[[],[]],[[],[]],[[],[]]]:[]:0.999999:0:0:0
+[10:49:48:751352 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:49:48:751852 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 1 Input: storeVehicle:76561198276524693:iben:Vodnik (Ambulance):GAZ_Vodnik_MedEvac:22-11-2017:2485:[[[],[]],[[],[]],[[],[]]]:[]:0.999999:0:0:0
+[10:49:48:751852 +01:00] [Thread 11848] extDB3: Input from Server: 1:VIRGA:GARAGE: iben (76561198276524693) stored GAZ_Vodnik_MedEvac @011039 [1108.85,11432.6,0.00167847]
+[10:49:48:751852 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:49:48:756853 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[]]
+[10:50:15:412237 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:queryVehicle:76561198276524693
+[10:50:15:412237 +01:00] [Thread 11848] extDB3: Output to Server: [2,"104"]
+[10:50:15:412237 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 104 Input: queryVehicle:76561198276524693
+[10:50:15:418238 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:50:15:430240 +01:00] [Thread 11848] extDB3: Input from Server: 4:104
+[10:50:15:430740 +01:00] [Thread 11848] extDB3: Output to Server: [1,[[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:50:18:019068 +01:00] [Thread 11848] extDB3: Input from Server: 9:LOCAL_TIME
+[10:50:18:019068 +01:00] [Thread 11848] extDB3: Output to Server: [1,[2017,11,22,10,50,18]]
+[10:50:18:021069 +01:00] [Thread 11848] extDB3: Input from Server: 1:VGAR:storeVehicle:76561198276524693:iben:MH-6J Little Bird:MH6J_DZ:22-11-2017:5952:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:50:18:021069 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:50:18:021569 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 1 Input: storeVehicle:76561198276524693:iben:MH-6J Little Bird:MH6J_DZ:22-11-2017:5952:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:50:18:021569 +01:00] [Thread 11848] extDB3: Input from Server: 1:VIRGA:GARAGE: iben (76561198276524693) stored MH6J_DZ @011039 [1108.27,11432.2,0.00164795]
+[10:50:18:021569 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:50:18:026569 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[]]
+[10:50:34:944718 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:queryVehicle:76561198276524693
+[10:50:34:944718 +01:00] [Thread 11848] extDB3: Output to Server: [2,"105"]
+[10:50:34:944718 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 105 Input: queryVehicle:76561198276524693
+[10:50:34:952219 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:50:34:984723 +01:00] [Thread 11848] extDB3: Input from Server: 4:105
+[10:50:34:984723 +01:00] [Thread 11848] extDB3: Output to Server: [1,[[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:50:37:207005 +01:00] [Thread 11848] extDB3: Input from Server: 9:LOCAL_TIME
+[10:50:37:207005 +01:00] [Thread 11848] extDB3: Output to Server: [1,[2017,11,22,10,50,37]]
+[10:50:37:208505 +01:00] [Thread 11848] extDB3: Input from Server: 1:VGAR:storeVehicle:76561198276524693:iben:HMMWV:HMMWV_DES_EP1:22-11-2017:0:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:50:37:208505 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:50:37:208505 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 1 Input: storeVehicle:76561198276524693:iben:HMMWV:HMMWV_DES_EP1:22-11-2017:0:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:50:37:209005 +01:00] [Thread 11848] extDB3: Input from Server: 1:VIRGA:GARAGE: iben (76561198276524693) stored HMMWV_DES_EP1 @011039 [1107.85,11432.1,0.0017395]
+[10:50:37:209005 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:50:37:215506 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[]]
+[10:50:50:933748 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:queryVehicle:76561198276524693
+[10:50:50:933748 +01:00] [Thread 11848] extDB3: Output to Server: [2,"106"]
+[10:50:50:933748 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 106 Input: queryVehicle:76561198276524693
+[10:50:50:946250 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[[25,"HMMWV_DES_EP1",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:50:50:972253 +01:00] [Thread 11848] extDB3: Input from Server: 4:106
+[10:50:50:972753 +01:00] [Thread 11848] extDB3: Output to Server: [1,[[25,"HMMWV_DES_EP1",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:50:52:914499 +01:00] [Thread 11848] extDB3: Input from Server: 9:LOCAL_TIME
+[10:50:52:914499 +01:00] [Thread 11848] extDB3: Output to Server: [1,[2017,11,22,10,50,52]]
+[10:50:52:916000 +01:00] [Thread 11848] extDB3: Input from Server: 1:VGAR:storeVehicle:76561198276524693:iben:Car (white):Skoda:22-11-2017:0:[[[],[]],[[],[]],[[],[]]]:[]:0.999973:0:0:0
+[10:50:52:916000 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:50:52:916000 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 1 Input: storeVehicle:76561198276524693:iben:Car (white):Skoda:22-11-2017:0:[[[],[]],[[],[]],[[],[]]]:[]:0.999973:0:0:0
+[10:50:52:916000 +01:00] [Thread 11848] extDB3: Input from Server: 1:VIRGA:GARAGE: iben (76561198276524693) stored Skoda @011039 [1108.72,11433.1,0.00167847]
+[10:50:52:916000 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:50:52:921000 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[]]
+[10:51:05:848642 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:queryVehicle:76561198276524693
+[10:51:05:848642 +01:00] [Thread 11848] extDB3: Output to Server: [2,"107"]
+[10:51:05:848642 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 107 Input: queryVehicle:76561198276524693
+[10:51:05:854643 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[[26,"Skoda",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[25,"HMMWV_DES_EP1",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:51:05:868644 +01:00] [Thread 11848] extDB3: Input from Server: 4:107
+[10:51:05:868644 +01:00] [Thread 11848] extDB3: Output to Server: [1,[[26,"Skoda",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[25,"HMMWV_DES_EP1",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:51:31:329378 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:queryVehicle:76561198276524693
+[10:51:31:329378 +01:00] [Thread 11848] extDB3: Output to Server: [2,"108"]
+[10:51:31:329378 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 108 Input: queryVehicle:76561198276524693
+[10:51:31:334878 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[[26,"Skoda",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[25,"HMMWV_DES_EP1",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:51:31:349380 +01:00] [Thread 11848] extDB3: Input from Server: 4:108
+[10:51:31:349380 +01:00] [Thread 11848] extDB3: Output to Server: [1,[[26,"Skoda",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[25,"HMMWV_DES_EP1",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:51:37:205624 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:spawnVehicle:25
+[10:51:37:205624 +01:00] [Thread 11848] extDB3: Output to Server: [2,"109"]
+[10:51:37:206124 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 109 Input: spawnVehicle:25
+[10:51:37:227627 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[["HMMWV_DES_EP1",0,[[[],[]],[[],[]],[[],[]]],[],1.000000,0.000000,"0","0"]]]
+[10:51:37:244629 +01:00] [Thread 11848] extDB3: Input from Server: 4:109
+[10:51:37:244629 +01:00] [Thread 11848] extDB3: Output to Server: [1,[["HMMWV_DES_EP1",0,[[[],[]],[[],[]],[[],[]]],[],1.000000,0.000000,"0","0"]]]
+[10:51:37:245129 +01:00] [Thread 11848] extDB3: Input from Server: 1:VGAR:deleteVehicle:25
+[10:51:37:245629 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:51:37:245629 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 1 Input: deleteVehicle:25
+[10:51:37:249129 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[]]
+[10:51:38:293762 +01:00] [Thread 11848] extDB3: Input from Server: 1:VIRGA:GARAGE: iben (76561198276524693) retrieved HMMWV_DES_EP1 @011039 [1108.65,11432.9,0.00170898]
+[10:51:38:293762 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:51:57:754233 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:queryVehicle:76561198276524693
+[10:51:57:754233 +01:00] [Thread 11848] extDB3: Output to Server: [2,"110"]
+[10:51:57:754233 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 110 Input: queryVehicle:76561198276524693
+[10:51:57:759734 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[[26,"Skoda",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:51:57:773736 +01:00] [Thread 11848] extDB3: Input from Server: 4:110
+[10:51:57:774236 +01:00] [Thread 11848] extDB3: Output to Server: [1,[[26,"Skoda",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:52:00:386067 +01:00] [Thread 11848] extDB3: Input from Server: 9:LOCAL_TIME
+[10:52:00:386067 +01:00] [Thread 11848] extDB3: Output to Server: [1,[2017,11,22,10,52,00]]
+[10:52:00:387567 +01:00] [Thread 11848] extDB3: Input from Server: 1:VGAR:storeVehicle:76561198276524693:iben:HMMWV:HMMWV_DES_EP1:22-11-2017:0:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:52:00:387567 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:52:00:387567 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 1 Input: storeVehicle:76561198276524693:iben:HMMWV:HMMWV_DES_EP1:22-11-2017:0:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:52:00:387567 +01:00] [Thread 11848] extDB3: Input from Server: 1:VIRGA:GARAGE: iben (76561198276524693) stored HMMWV_DES_EP1 @011039 [1108.39,11431.7,0.0017395]
+[10:52:00:387567 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:52:00:395068 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[]]
+[10:52:02:146791 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:queryVehicle:76561198276524693
+[10:52:02:146791 +01:00] [Thread 11848] extDB3: Output to Server: [2,"111"]
+[10:52:02:146791 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 111 Input: queryVehicle:76561198276524693
+[10:52:02:154792 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[[26,"Skoda",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[27,"HMMWV_DES_EP1",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:52:02:165793 +01:00] [Thread 11848] extDB3: Input from Server: 4:111
+[10:52:02:165793 +01:00] [Thread 11848] extDB3: Output to Server: [1,[[26,"Skoda",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[27,"HMMWV_DES_EP1",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:52:14:858905 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:queryVehicle:76561198276524693
+[10:52:14:858905 +01:00] [Thread 11848] extDB3: Output to Server: [2,"112"]
+[10:52:14:858905 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 112 Input: queryVehicle:76561198276524693
+[10:52:14:864406 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[[26,"Skoda",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[27,"HMMWV_DES_EP1",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:52:14:879908 +01:00] [Thread 11848] extDB3: Input from Server: 4:112
+[10:52:14:880408 +01:00] [Thread 11848] extDB3: Output to Server: [1,[[26,"Skoda",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[27,"HMMWV_DES_EP1",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[22,"350z_silver",[[[],[]],[[],[]],[[],[]]],7196,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:52:19:435986 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:spawnVehicle:22
+[10:52:19:435986 +01:00] [Thread 11848] extDB3: Output to Server: [2,"113"]
+[10:52:19:438487 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 113 Input: spawnVehicle:22
+[10:52:19:449988 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[["350z_silver",7196,[[[],[]],[[],[]],[[],[]]],[],1.000000,0.000000,"0","0"]]]
+[10:52:19:474991 +01:00] [Thread 11848] extDB3: Input from Server: 4:113
+[10:52:19:474991 +01:00] [Thread 11848] extDB3: Output to Server: [1,[["350z_silver",7196,[[[],[]],[[],[]],[[],[]]],[],1.000000,0.000000,"0","0"]]]
+[10:52:19:475491 +01:00] [Thread 11848] extDB3: Input from Server: 1:VGAR:deleteVehicle:22
+[10:52:19:475491 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:52:19:475491 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 1 Input: deleteVehicle:22
+[10:52:19:480992 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[]]
+[10:52:20:518624 +01:00] [Thread 11848] extDB3: Input from Server: 1:VIRGA:GARAGE: iben (76561198276524693) retrieved 350z_silver @011039 [1108.43,11432.7,0.0015564]
+[10:52:20:518624 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:52:43:970602 +01:00] [Thread 11848] extDB3: Input from Server: 2:VGAR:queryVehicle:76561198276524693
+[10:52:43:970602 +01:00] [Thread 11848] extDB3: Output to Server: [2,"114"]
+[10:52:43:971602 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 114 Input: queryVehicle:76561198276524693
+[10:52:43:977603 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[[26,"Skoda",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[27,"HMMWV_DES_EP1",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:52:43:987604 +01:00] [Thread 11848] extDB3: Input from Server: 4:114
+[10:52:43:988104 +01:00] [Thread 11848] extDB3: Output to Server: [1,[[26,"Skoda",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[27,"HMMWV_DES_EP1",[[[],[]],[[],[]],[[],[]]],0,"22-11-2017"],[24,"MH6J_DZ",[[[],[]],[[],[]],[[],[]]],5952,"22-11-2017"],[20,"Mi17_Civilian_DZ",[[[],[]],[[],[]],[[],[]]],9872,"22-11-2017"],[21,"UAZ_INS",[[[],[]],[[],[]],[[],[]]],9275,"22-11-2017"],[23,"GAZ_Vodnik_MedEvac",[[[],[]],[[],[]],[[],[]]],2485,"22-11-2017"]]]
+[10:52:46:884972 +01:00] [Thread 11848] extDB3: Input from Server: 9:LOCAL_TIME
+[10:52:46:884972 +01:00] [Thread 11848] extDB3: Output to Server: [1,[2017,11,22,10,52,46]]
+[10:52:46:886472 +01:00] [Thread 11848] extDB3: Input from Server: 1:VGAR:storeVehicle:76561198276524693:iben:Nissan 350z (Silver):350z_silver:22-11-2017:7196:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:52:46:886472 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:52:46:886472 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: UniqueID: 1 Input: storeVehicle:76561198276524693:iben:Nissan 350z (Silver):350z_silver:22-11-2017:7196:[[[],[]],[[],[]],[[],[]]]:[]:1:0:0:0
+[10:52:46:886972 +01:00] [Thread 11848] extDB3: Input from Server: 1:VIRGA:GARAGE: iben (76561198276524693) stored 350z_silver @011039 [1108.63,11432.4,0.00167847]
+[10:52:46:886972 +01:00] [Thread 11848] extDB3: Output to Server: 
+[10:52:46:898474 +01:00] [Thread 12972] extDB3: SQL_CUSTOM: Trace: Result: [1,[]]

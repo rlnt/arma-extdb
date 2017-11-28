@@ -1,0 +1,185 @@
+// ---------------------------------------------------------------------------
+// :: RULES:
+//    (1) 1st layer parameter check - if user set not valid config array for 'EXTDB_DB_POOL' or 'EXTDB_PS_POOL', error will pop-ups immediatelly during parsing
+//    (2) 2nd layer parameter check - use paranoid approach for specific database and protocol config settings. Print all to RPT.
+//    (3) If database connection for specific addon fails, this situation shouldn't be fatal for fellow addon's databases.
+// ---------------------------------------------------------------------------
+// :: 'EXTDB_connected' statuses (use for further testing in fncs):
+//    [FATAL ERROR] > self explanatory - not able to connect at all!
+//    [0]   > some of db connection(s) || session protocol(s) loading failed (continue with valid ones - will not break other addons with valid setup)
+//    [1]   > success 100%
+// ---------------------------------------------------------------------------
+// :: TESTING SCENARIOS (BELLOW SOME OF RPT LOG EXAMPLES):
+//    [00] : How it looks, when everything is OK
+//    [01] : How it looks, when you try load extdb from client instead of server
+//    [02] : How it looks, when you set wrong database name
+//    [03] : How it looks, when you set wrong typaName and wrong database name
+//    [04] : How it looks, when forgot set config item, i.e. something for session protocol
+//    [05] : How it looks, when you set not valid addon-conf.ini file
+// ---------------------------------------------------------------------------
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//            TESTING SCENARIO: 2 DATABASES, 3 SESSION PROTOCOLS
+//                   1st database: 2 session protocols
+//                   2nd database: 1 session protocol
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// :: DATABASE POOL
+// template: ["database_name","database_name_codename_for_RPT"]
+// #define EXTDB_DB_POOL [ \
+//    ["vehicle_manager","myCodeName11"] \
+//   ,["new_addon_db","myAnotherCodeName55"] \
+// ]
+
+// :: SESSION PROTOCOL POOL:
+// template: ["database_name","protocol_custom_name","addon_ini_file","protocol_codename_for_RPT"]
+// #define EXTDB_PS_POOL [ \
+//    ["vehicle_manager","IBEN","vg-conf.ini","myProtocolCodenameFor111"] \
+//   ,["vehicle_manager","TEST","test-conf.ini","myProtocolCodenameFor222"] \
+//   ,["new_addon_db","NEW","new-conf.ini","myProtocolCodenameFor333"] \
+// ]
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                        TESTING SCENARIO 00
+//               How it looks, when everything is OK
+//                        EXTDB_connected = 1
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+4:23:22 "=== [EXTDB, [EXTDB_init.sqf]] || DEBUG :: [EXTDB_fnc_init_ROOTer] >> Addon relative root >> [z\addons\dayz_server\extDB]"
+4:23:22 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> Connection procedure initiated..."
+4:23:23 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> DB pool processing started..."
+4:23:23 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Connection to database [0-myCodeName11] set."
+4:23:23 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Connection to database [1-myAnotherCodeName55] set."
+4:23:23 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> PS pool protocol started..."
+4:23:23 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Session protocol [0-myProtocolCodenameFor111] set."
+4:23:23 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Session protocol [1-myProtocolCodenameFor222] set."
+4:23:23 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Session protocol [2-myProtocolCodenameFor333] set."
+4:23:23 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Locking API..."
+4:23:23 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Result: [2/2] databas(es) connected [3/3] session protocol(s) set."
+4:23:23 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> Connection procedure finished in [0.222 seconds] with status [1]."
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                        TESTING SCENARIO 01
+//    How it looks, when you try load extdb from client instead of server
+//                  EXTDB_connected = 'FATAL ERROR'
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// @INFO:
+// > See first line - if server, shoud starts with 'z\addons\dayz_server\...'
+// ---------------------------------------------------------------------------
+3:20:58 "=== [EXTDB, [EXTDB_init.sqf]] || DEBUG :: [EXTDB_fnc_init_ROOTer] >> Addon relative root >> [extDB]"
+3:20:58 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> Connection procedure initiated..."
+3:20:58 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> ERROR >> Connection not found. Reason: <Probably missing dll library(-ies), wrong file placement etc. Check documentation - follow all required steps!>. Exiting."
+3:20:58 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> Connection procedure finished in [0.0330009 seconds] with status [FATAL ERROR]."
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                        TESTING SCENARIO 02
+//             How it looks, when you set wrong database name
+//                        EXTDB_connected = 0
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// @INFO:
+//   #define EXTDB_DB_POOL [ \
+//      ["vehicle_managerXY","myCodeName11"] \     // WRONG: "vehicle_managerXY" >> CORRECT: "vehicle_manager"
+//     ,["new_addon_db","myAnotherCodeName55"] \
+//   ]
+// > If specific database cannot be connected, all further activity for this database is exited (No attemtps for setting session protocol(s))
+// > Fail exit for one database have no influence on valid databases that can be connected.
+// ---------------------------------------------------------------------------
+4:43:34 "=== [EXTDB, [EXTDB_init.sqf]] || DEBUG :: [EXTDB_fnc_init_ROOTer] >> Addon relative root >> [z\addons\dayz_server\extDB]"
+4:43:34 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> Connection procedure initiated..."
+4:43:34 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> DB pool processing started..."
+4:43:34 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> ERROR >> Failed to connect to database [0-myCodeName11] > [0,"Database Config Error"]"
+4:43:34 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Connection to database [1-myAnotherCodeName55] set."
+4:43:34 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> PS pool protocol started..."
+4:43:34 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Session protocol [2-myProtocolCodenameFor333] set."
+4:43:34 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Locking API..."
+4:43:34 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Result: [1/2] databas(es) connected [1/3] session protocol(s) set."
+4:43:34 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> Connection procedure finished in [0.205002 seconds] with status [0]."
+// ---------------------------------------------------------------------------
+// @extDB3\logs:
+[04:43:34:751913 +01:00] [Thread 8544] extDB3: Config Error: vehicle_managerXY: No such node (vehicle_managerXY.IP)
+[04:43:34:801419 +01:00] [Thread 8544] extDB3: Locked
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                        TESTING SCENARIO 03
+//    How it looks, when you set wrong typaName and wrong database name
+//                   EXTDB_connected = FATAL ERROR
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// @INFO:
+//   #define EXTDB_DB_POOL [ \
+//      ["vehicle_managerXY","myCodeName11"] \     // WRONG: "vehicle_managerXY" >> CORRECT: "vehicle_manager"
+//     ,[["new_addon_db"],"myAnotherCodeName55"] \ // WRONG: ["new_addon_db"] >> CORRECT: "new_addon_db"
+//   ]
+// ---------------------------------------------------------------------------
+5:23:13 "=== [EXTDB, [EXTDB_init.sqf]] || DEBUG :: [EXTDB_fnc_init_ROOTer] >> Addon relative root >> [z\addons\dayz_server\extDB]"
+5:23:13 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> Connection procedure initiated..."
+5:23:13 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> DB pool processing started..."
+5:23:13 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> ERROR >> Failed to connect to database [0-myCodeName11] > [0,"Database Config Error"]"
+5:23:13 "=== [EXTDB, [EXTDB_DB_POOL, item [1]]] || DEBUG :: [EXTDB_fnc_paramCheck] >> Caller script params test failure! Wrong typeName! >> [_this select 0] param is expected to be >> [STRING]received >> [ARRAY]"
+5:23:13 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> No database available. Exiting EXTDB initiation."
+5:23:13 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> Connection procedure finished in [0.173004 seconds] with status [FATAL ERROR]."
+// ---------------------------------------------------------------------------
+// @extDB3\logs:
+[05:23:13:753986 +01:00] [Thread 4916] extDB3: Config Error: vehicle_managerXY: No such node (vehicle_managerXY.IP)
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                        TESTING SCENARIO 04
+// How it looks, when forgot set config item, i.e. something for session protocol
+//                        EXTDB_connected = 0
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// @INFO:
+//   #define EXTDB_PS_POOL [ \
+//      ["vehicle_manager","IBEN","vg-conf.ini","myProtocolCodenameFor111"] \
+//     ,["vehicle_manager","TEST","test-conf.ini","myProtocolCodenameFor222"] \
+//     ,["new_addon_db","NEW","new-conf.ini"] \       // MISSING: [...,...,"myProtocolCodenameFor333"]
+//   ]
+// ---------------------------------------------------------------------------
+5:46:59 "=== [EXTDB, [EXTDB_init.sqf]] || DEBUG :: [EXTDB_fnc_init_ROOTer] >> Addon relative root >> [z\addons\dayz_server\extDB]"
+5:46:59 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> Connection procedure initiated..."
+5:46:59 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> DB pool processing started..."
+5:46:59 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Connection to database [0-myCodeName11] set."
+5:46:59 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Connection to database [1-myAnotherCodeName55] set."
+5:46:59 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> PS pool protocol started..."
+5:46:59 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Session protocol [0-myProtocolCodenameFor111] set."
+5:46:59 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Session protocol [1-myProtocolCodenameFor222] set."
+5:46:59 "=== [EXTDB, [EXTDB_PS_POOL, item [2]]] || DEBUG :: [EXTDB_fnc_paramCheck || Params logic test failure!] >> Current number of params >> [3] doesn't match expected number of arguments >> [4]!"
+5:46:59 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Locking API..."
+5:46:59 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Result: [2/2] databas(es) connected [2/3] session protocol(s) set."
+5:46:59 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> Connection procedure finished in [0.254997 seconds] with status [0]."
+// ---------------------------------------------------------------------------
+// @extDB3\logs:
+[05:46:59:320001 +01:00] [Thread 10668] extDB3: Locked
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                        TESTING SCENARIO 05
+//          How it looks, when you set not valid addon-conf.ini file
+//                        EXTDB_connected = 0
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// @INFO:
+//   #define EXTDB_PS_POOL [ \
+//      ["vehicle_manager","IBEN","vg-conf.inixy","myProtocolCodenameFor111"] \ // WRONG: "vg-conf.inixy" >> CORRECT: ""vg-conf.ini""
+//     ,["vehicle_manager","TEST","test-conf.ini","myProtocolCodenameFor222"] \
+//     ,["new_addon_db","NEW","new-conf.ini","myProtocolCodenameFor333"] \
+//   ]
+// ---------------------------------------------------------------------------
+5:58:50 "=== [EXTDB, [EXTDB_init.sqf]] || DEBUG :: [EXTDB_fnc_init_ROOTer] >> Addon relative root >> [z\addons\dayz_server\extDB]"
+5:58:50 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> Connection procedure initiated..."
+5:58:50 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> DB pool processing started..."
+5:58:50 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Connection to database [0-myCodeName11] set."
+5:58:50 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Connection to database [1-myAnotherCodeName55] set."
+5:58:50 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> PS pool protocol started..."
+5:58:50 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> ERROR >> Failed to set session protocol [0-myProtocolCodenameFor111] > [0,"Failed to Load Protocol"]"
+5:58:50 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Session protocol [1-myProtocolCodenameFor222] set."
+5:58:50 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Session protocol [2-myProtocolCodenameFor333] set."
+5:58:50 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Locking API..."
+5:58:50 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> INFO >> Result: [2/2] databas(es) connected [2/3] session protocol(s) set."
+5:58:50 "=== [EXTDB, [SYSTEM]] || DEBUG :: [EXTDB_connect] >> Connection procedure finished in [0.25 seconds] with status [0]."
+// ---------------------------------------------------------------------------
+// @extDB3\logs:
+[05:58:50:484296 +01:00] [Thread 10672] extDB3: SQL_CUSTOM: D:\DieHard_Server\@extDB3\sql_custom\vg-conf.inixy doesn't exist
+[05:58:50:484296 +01:00] [Thread 10672] extDB3: Failed to Load Protocol: SQL_CUSTOM
+[05:58:50:486296 +01:00] [Thread 10672] extDB3: Locked

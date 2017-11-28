@@ -1,0 +1,302 @@
+*******************************************************************************************
+:: extDB3 author: @torndeco
+:: Official addon homepage: https://bitbucket.org/torndeco/extdb3/wiki/Home
+:: Oficial docs src: https://bitbucket.org/torndeco/extdb3/wiki/extDB3%20-%20System
+:: Read licence info!
+*******************************************************************************************
+:: This excerpt was created by @iben
+:: last update [2017-11-21]
+*******************************************************************************************
+
+*******************************************************************************************
+*                                    SYSTEM TOC                                           *
+*******************************************************************************************
+  - BASIC CONNECTION FLOW
+    > VERSION (ping)
+    > ADD_DATABASE
+    > ADD_DATABASE_PROTOCOL
+    > ADD_PROTOCOL (custom separate logfile)
+    > LOCK (final - no password)
+    > LOCK (final - using pasword)
+
+  - TIME / DATE
+    > LOCAL_TIME
+    > UTC_TIME
+    > UPTIME
+    > DATEADD
+
+  - UTILS / HELPERS
+    > LOCK_STATUS
+    > UNLOCK
+    > RESET
+    > OUTPUTSIZE
+
+
+*******************************************************************************************
+*                                                                                         *
+*                               BASIC CONNECTION FLOW                                     *
+*                                                                                         *
+*******************************************************************************************
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + PING: VERSION
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    "extDB3" callExtension "9:VERSION"
+    ---------------------------------------------------------------------------------------
+    ++ Return: Version
+    ---------------------------------------------------------------------------------------
+    ++ Test
+    [00:51:21:233457 +01:00] [Thread 10968] extDB3: Input from Server: 9:VERSION
+    [00:51:21:233457 +01:00] [Thread 10968] extDB3: Output to Server: 1.032
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + ADD_DATABASE
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    "extDB3" callExtension "9:ADD_DATABASE:<DATABASE_CONFIG_NAME>"
+    "extDB3" callExtension "9:ADD_DATABASE:<DATABASE_CONFIG_NAME>:<DATABASE_NAME>"
+    Note: call this command before you LOCK
+    ---------------------------------------------------------------------------------------
+    ++ Return:
+    [1] // OK
+    [0, "Generic Error Message"] // ERROR
+    ---------------------------------------------------------------------------------------
+    +++ Positive test:
+    [00:55:20:893165 +01:00] [Thread 10968] extDB3: Input from Server: 9:ADD_DATABASE:vehicle_manager
+    [00:55:20:910166 +01:00] [Thread 10968] extDB3: Output to Server: [1]
+    ---------------------------------------------------------------------------------------
+    +++ Negative test (wrong database name):
+    [01:00:25:935612 +01:00] [Thread 10968] extDB3: Input from Server: 9:ADD_DATABASE:XX
+    [01:00:25:940613 +01:00] [Thread 10968] extDB3: Config Error: XX: No such node (XX.IP)
+    [01:00:25:940613 +01:00] [Thread 10968] extDB3: Output to Server: [0,"Database Config Error"]
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + ADD_DATABASE_PROTOCOL
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    "extDB3" callExtension "9:ADD_DATABASE_PROTOCOL:<DATABASE_NAME>:<PROTOCOL>:<PROTOCOL_NAME>"
+    Note: call this command before you LOCK
+    ---------------------------------------------------------------------------------------
+    ++ Return
+    [1] // Loaded Protocol Ok
+    [0, "Generic Error Message"] // ERROR
+    ---------------------------------------------------------------------------------------
+    ++ Positive test
+    [01:10:21:529679 +01:00] [Thread 10968] extDB3: Input from Server: 9:ADD_DATABASE_PROTOCOL:vehicle_manager:SQL_CUSTOM:IBEN:addon1-conf.ini
+    [01:10:21:529679 +01:00] [Thread 10968] extDB3: Output to Server: [1]
+    ---------------------------------------------------------------------------------------
+    +++ Negative test (Wrong ini filename):
+    [01:11:21:895131 +01:00] [Thread 10968] extDB3: Input from Server: 9:ADD_DATABASE_PROTOCOL:vehicle_manager:SQL_CUSTOM:IBEN:addon1-conf.inix
+    [01:11:21:902132 +01:00] [Thread 10968] extDB3: SQL_CUSTOM: sql_custom\addon1-conf.inix doesn't exist
+    [01:11:21:902132 +01:00] [Thread 10968] extDB3: Failed to Load Protocol: SQL_CUSTOM
+    [01:11:21:902132 +01:00] [Thread 10968] extDB3: Output to Server: [0,"Failed to Load Protocol"]
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + ADD_PROTOCOL (custom separate logfile)
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    "extDB3" callExtension "9:ADD_PROTOCOL:<PROTOCOL>:<PROTOCOL_NAME>:<logfile>"
+    Note: call this command before you LOCK
+    Note: for now, only <PROTOCOL> == LOG is available
+    Note: Use it for addon specific log to have all related logs in separate log folder!
+    ---------------------------------------------------------------------------------------
+    ++ Return
+    [1] // Loaded Protocol Ok
+    [0, "Generic Error Message"] // ERROR
+    ---------------------------------------------------------------------------------------
+    ++ Test
+    (1) Create LOG session protocol for addon Virtual Garage
+        9:ADD_PROTOCOL:LOG:VIRGA:virtual_garage
+        + Return:
+          ! Created new physicall logfile 'virtual_garage.log' inside extDB3: logs/YEAR/MONTH/DAY/h-mm-ss.log
+          [03:49:20:417520 +01:00] [Thread 7016] extDB3: Input from Server: 9:ADD_PROTOCOL:LOG:VIRGA:virtual_garage
+          [03:49:20:419020 +01:00] [Thread 7016] extDB3: Output to Server: [1]
+    (2) Create log with text: "We have just connected to new log protocol."
+        "extDB3" callExtension "1:VIRGA:This is MYADDON first log!"
+        + Return:
+          [03:51:11:608639 +01:00] [Thread 7016] extDB3: Input from Server: 1:VIRGA:"We have just connected to new log protocol."
+          [03:51:11:608639 +01:00] [Thread 7016] extDB3: Output to Server: (note - nothing)
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + LOCK (final - no password)
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    "extDB3" callExtension "9:LOCK"
+    ---------------------------------------------------------------------------------------
+    ++ Note: Disables all System Commands except for VERSION + LOCK_STATUS + various TIME/DATA Commands
+    ---------------------------------------------------------------------------------------
+    ++ Test
+    [01:14:05:460487 +01:00] [Thread 10968] extDB3: Input from Server: 9:LOCK
+    [01:14:05:460487 +01:00] [Thread 10968] extDB3: Locked
+    [01:14:05:460487 +01:00] [Thread 10968] extDB3: Output to Server: [1]
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + LOCK (final - using pasword)
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    "extDB3" callExtension "9:LOCK:myPassword123"
+    ---------------------------------------------------------------------------------------
+    ++ Test
+    [01:18:10:937527 +01:00] [Thread 10708] extDB3: Input from Server: 9:LOCK:myPassword123
+    [01:18:10:937527 +01:00] [Thread 10708] extDB3: Locked
+    [01:18:10:937527 +01:00] [Thread 10708] extDB3: Output to Server: [1]
+
+
+*******************************************************************************************
+*                                                                                         *
+*                                     TIME / DATE                                         *
+*                                                                                         *
+*******************************************************************************************
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + LOCAL_TIME
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    "extDB3" callExtension "9:LOCAL_TIME"
+    ---------------------------------------------------------------------------------------
+    ++ Return:
+    (1) Local time
+    (2) Local Time + 3 Hours
+    (3) Local Time + 30 Days + 24 Hours + 60 Minutes + 60 Seconds
+    Note: Years/Months not supported yet
+    ---------------------------------------------------------------------------------------
+    ++ Test
+    (1) "extDB3" callExtension "9:LOCAL_TIME"
+    [01:31:49:761361 +01:00] [Thread 10708] extDB3: Input from Server: 9:LOCAL_TIME
+    [01:31:49:762361 +01:00] [Thread 10708] extDB3: Output to Server: [1,[2017,11,21,01,31,49]]
+
+    (2) "extDB3" callExtension "9:LOCAL_TIME:3"
+    [01:32:55:627128 +01:00] [Thread 10708] extDB3: Input from Server: 9:LOCAL_TIME:3
+    [01:32:55:627128 +01:00] [Thread 10708] extDB3: Output to Server: [1,[2017,11,21,04,32,55]]
+
+    (3) "extDB3" callExtension "9:LOCAL_TIME:[0,0,30,24,60,60]"
+    [01:33:36:596472 +01:00] [Thread 10708] extDB3: Input from Server: 9:LOCAL_TIME:[0,0,30,24,60,60]
+    [01:33:36:597472 +01:00] [Thread 10708] extDB3: Output to Server: [1,[2017,12,23,09,30,30]]
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + UTC_TIME
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    "extDB3" callExtension "9:UTC_TIME"
+    ---------------------------------------------------------------------------------------
+    ++ Return:
+    (1) UTC time
+    (2) UTC Time + 3
+    (3) UTC Time + 30 Days + 24 Hours + 60 Minutes + 60 Seconds
+    Note: Years/Months not supported yet
+    ---------------------------------------------------------------------------------------
+    ++ Test
+    (1) "extDB3" callExtension "9:UTC_TIME"
+    [01:36:05:802006 +01:00] [Thread 10708] extDB3: Input from Server: 9:UTC_TIME
+    [01:36:05:803006 +01:00] [Thread 10708] extDB3: Output to Server: [1,[2017,11,21,00,36,05]]
+
+    (2) "extDB3" callExtension "9:UTC_TIME:3"
+    [01:36:29:898384 +01:00] [Thread 10708] extDB3: Input from Server: 9:UTC_TIME:3
+    [01:36:29:898384 +01:00] [Thread 10708] extDB3: Output to Server: [1,[2017,11,21,03,36,29]]
+
+    (3) "extDB3" callExtension "9:UTC_TIME:[0,0,30,24,60,60]"
+    [01:37:05:893443 +01:00] [Thread 10708] extDB3: Input from Server: 9:UTC_TIME:[0,0,30,24,60,60]
+    [01:37:05:893443 +01:00] [Thread 10708] extDB3: Output to Server: [1,[2017,12,23,08,33,59]]
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + UPTIME
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    (1) "extDB3" callExtension "9:UPTIME:SECONDS"
+    (2) "extDB3" callExtension "9:UPTIME:MINUTES"
+    (3) "extDB3" callExtension "9:UPTIME:HOURS"
+    ---------------------------------------------------------------------------------------
+    ++ Return: Number of seconds/minutes/hours since the first callExtension
+    ---------------------------------------------------------------------------------------
+    ++ Test
+    (1) "9:UPTIME:SECONDS"
+    [01:42:58:164592 +01:00] [Thread 10708] extDB3: Input from Server: 9:UPTIME:SECONDS
+    [01:42:58:165592 +01:00] [Thread 10708] extDB3: Output to Server: 1558
+
+    (2) "extDB3" callExtension "9:UPTIME:MINUTES"
+    [01:43:18:855775 +01:00] [Thread 10708] extDB3: Input from Server: 9:UPTIME:MINUTES
+    [01:43:18:855775 +01:00] [Thread 10708] extDB3: Output to Server: 26
+
+    (3) "extDB3" callExtension "9:UPTIME:HOURS"
+    [01:43:24:790115 +01:00] [Thread 10708] extDB3: Input from Server: 9:UPTIME:HOURS
+    [01:43:24:790115 +01:00] [Thread 10708] extDB3: Output to Server: 0
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + DATEADD
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    "extDB3" callExtension "9:DATEADD:[Year,Month,Day,Hour,Minute,Seconds]:[Days,Hours,Minutes,Seconds]"
+    ---------------------------------------------------------------------------------------
+    ++ Return: Number of seconds/minutes/hours since the first callExtension
+    ---------------------------------------------------------------------------------------
+    ++ Test: Give me date from given date that is 1day, 1hour, 1minute and 1second in the future
+    [01:47:33:461338 +01:00] [Thread 10708] extDB3: Input from Server: 9:DATEADD:[2017,12,23,08,33,59]:[1,1,1,1]
+    [01:47:33:461338 +01:00] [Thread 10708] extDB3: Output to Server: [1,[2017,12,24,09,35,00]]
+
+
+*******************************************************************************************
+*                                                                                         *
+*                                    UTILS / HELPERS                                      *
+*                                                                                         *
+*******************************************************************************************
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + LOCK_STATUS
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    "extDB3" callExtension "9:LOCK_STATUS"
+    ---------------------------------------------------------------------------------------
+    ++ Return
+    [0] // extension is unlocked.
+    [1] // extension is locked.
+    ---------------------------------------------------------------------------------------
+    ++ Test
+    [01:22:11:518288 +01:00] [Thread 10708] extDB3: Input from Server: 9:LOCK_STATUS
+    [01:22:11:518288 +01:00] [Thread 10708] extDB3: Output to Server: [1]
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + UNLOCK (testing using psw - without basically the same without psw)
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    "extDB3" callExtension "9:UNLOCK:<code>"
+    ---------------------------------------------------------------------------------------
+    ++ Return
+    [0] // wrong unlock code.  
+    [1] // extension is unlocked.
+    ---------------------------------------------------------------------------------------
+    ++ Positive test
+    [01:24:40:193791 +01:00] [Thread 10708] extDB3: Input from Server: 9:UNLOCK:myPassword123
+    [01:24:40:193791 +01:00] [Thread 10708] extDB3: UnLocked
+    [01:24:40:193791 +01:00] [Thread 10708] extDB3: Output to Server: [1]
+    ---------------------------------------------------------------------------------------
+    +++ Negative test (Wrong password):
+    [01:24:18:733564 +01:00] [Thread 10708] extDB3: Input from Server: 9:UNLOCK:myPassword1234
+    [01:24:18:733564 +01:00] [Thread 10708] extDB3: Output to Server: [0]
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + RESET (mainly for debug - reconnect string?)
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    "extDB3" callExtension "9:RESET"
+    ---------------------------------------------------------------------------------------
+    ++ Return:
+    [0] // ERROR - reset option has to be allowed in extdb3-conf.ini!
+    [1] // OK
+    Note: extDB3 needs to be unlocked. Closes All Database Connections & Protocols.
+    ---------------------------------------------------------------------------------------
+    ++ Test
+    [01:27:23:045106 +01:00] [Thread 10708] extDB3: Input from Server: 9:RESET
+    [01:27:23:046106 +01:00] [Thread 10708] extDB3: Output to Server: [1]
+
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  + OUTPUTSIZE (just for debug)
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    ++ Syntax
+    "extDB3" callExtension "9:OUTPUTSIZE"
+    Note: call this command before you LOCK
+    ---------------------------------------------------------------------------------------
+    ++ Return: arma outputSize for extensions
+    [01:57:30:319476 +01:00] [Thread 10708] extDB3: Input from Server: 9:OUTPUTSIZE
+    [01:57:30:319476 +01:00] [Thread 10708] extDB3: Output Size: 80
+    [01:57:30:319476 +01:00] [Thread 10708] extDB3: Output to Server: 80

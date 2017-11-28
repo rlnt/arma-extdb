@@ -39,7 +39,7 @@
 //            your 'log to RPT' or 'log on screen' option from one place,
 //            instead of each fnc separately.
 // :: (3) '__ROOTDBG__' >> enable/disable in this file (bellow). If enabled,
-//        you can see general log in RPT file
+//        you can see autodiscovered addon root path in RPT file
 // ***************************************************************************
 #define __EXTDBGEN__
 #define __ROOTDBG__
