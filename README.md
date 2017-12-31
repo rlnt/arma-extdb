@@ -1,11 +1,11 @@
 # extDB - Distribution pack for Dayz Epoch modders
 
-**Addon for Connecting to MariaDB/MySQL Databases (distribution for A2 dayzEpoch 1.0.6.2+)**
+**Addon for Connecting to MariaDB/MySQL Databases (distribution for A2 dayzEpoch 1.0.6.2)**
 
 ---
 
-> **Distribution Last update [2017-11-23], v0.1 || extDB version: extDB3 [1032] ||** ([see changelog](#changelog))
-> **STATUS: WIP** (todo: readme, helper function introduction, reconnection string in case of connection failure, enhanced security model (randomize connection protocol ID's - storing to uiNamesapce...etc))
+> **Distribution Last update [2017-12-31], v0.3 || extDB version: extDB3 [1032] ||** ([see changelog](#changelog))
+> **STATUS: WIP** (todo: readme, helper function introduction, reconnection string in case of connection failure, enhanced security model (randomize connection protocol ID's - storing to uiNamesapce...etc), debug console video tutorial(is anyone interested?))
 
 ---
 
@@ -74,7 +74,10 @@ _When you see **[number]** in the text bellow, check the [number] in this visual
 ## Installation Checklist for SERVER OWNERS
 
 - [x] [Visual Studio C++ Redistributable 2015][visualredis] **[1]** is available for server.
-- [x] Original `tbbmalloc.dll` library **[2]** was replaced by the one provided in this distribution and was copied into Arma server root. ([Which `tbbmalloc.dll` do you mean](arma_server_root/)?)
+- [x] **Epoch 1.0.6.2** `tbbmalloc.dll` library **[2]** was copied into Arma server root.<br>**_You can use these sources (`current version: Intel TBB 2018 Update 2`)_:**
+  - [x] Epoch source files: `tbbmalloc.dll` is available inside `DayZ_Epoch_Server_1.0.6.2_Release.7z`. ([Where can I find it?][epochrelease])
+  - [x] This repo source ([Where exactly?](arma_server_root/))
+  - **_`Info: original extDB3 tbbmalloc.dll is a little bit outdated. For A2/A2OA is perfectly safe to use Epoch dll source.`_** [For more info about extDB3 changes to original tbbmalloc see wiki.][tbbmallocchanges]
 - [x] `@extDB` addon **[5]** is in the Arma server root. ([Where is `@extDB` addon](arma_server_root/)?)
 - [x] `@extDB` addon was added to **launcher parameters** ( i.e. `@extDB;@DayZ_Epoch;@DayZ_Epoch_Server` for Dayz Epoch, or `@extDB;@DayzOverwatch;@DayZ_Epoch;@DayZ_Epoch_Server` for Overpoch).<br> **Do NOT use `@extDB3` folder name (just `@extDB`), or dayz launcher will not recognize the addon and your server will NOT be listed!** ([Where can I test if DZLauncher is able to recognize my server](http://dz.launcher.eu/check)?)
 - [x] Addon using `@extDB` was configured - **Follow instructions provided by addon author!**
@@ -281,7 +284,7 @@ END
 // ---
 
 #define EXTDB_PR_POOL [ \
-   [1,"myProtocol111","RemoveOldVG","VG Cleanup"]
+   [1,"myProtocol111","RemoveOldVG","VG Cleanup"] \
 ]
 
 // Important:
@@ -395,7 +398,9 @@ SQL1_1 = CALL RemoveOldVG;
 ```
 
 - **Copy `@extDB` related files into arma server root**
-  - [x] From [`arma_server_root`](arma_server_root/) copy to you arma server root: (1) folder **`@extDB`** _(modifications are already done from previous step)_; (2) **`tbbmalloc.dll`** _(old one has to be replaced)_;
+  - [x] From [`arma_server_root`](arma_server_root/) copy to you arma server root:
+    - [x] folder **`@extDB`** _(modifications are already done from previous step)_;
+    - [x] **`tbbmalloc.dll`** _(if you already running Epoch 1.0.6.2 with new DLL files, you can skip this step)_;
 
 <p align="center">--- (03) ---</p>
 
@@ -491,7 +496,7 @@ Root path is autodiscovered on init and stored into **`EXTDBROOT`** variable. If
     + [x] **`extdb3-conf.ini`:** Make sure it already has correct info.
     + [x] **`extDB3.dll`**
     + [x] **`extDB3-test.exe`**
-  + [x] Replace original **`tbbmalloc.dll`** library **[2]** in **local arma server root** by [the one provided in this distribution](arma_server_root/).
+  + [x] Make sure, you are running Epoch 1.0.6.2 **`tbbmalloc.dll`** library **[2]** in **local arma server root**.
   + [x] Open [**`arma_server_root/@extDB`**](arma_server_root/@extDB/) folder and, again, copy whole folder **`sql_custom`** to your **local arma server root**:
     + [x] Open it in your editor for later - you will write your stored procedures in there (and test them in console...)
   + [x] That's it. Now you can start console from your local arma server root and run **`extDB3-test.exe`**.
@@ -544,6 +549,7 @@ Root path is autodiscovered on init and stored into **`EXTDBROOT`** variable. If
 | :---         | :---    | :---                                                                                                            |
 | [2017-11-23] | v0.1    | Initial release                                                                                                 |
 | [2017-11-28] | v0.2    | Added debug src files;<br>TIP 01: 'Use power of stored root path'; TIP 02: 'Use debug options' - incl. examples |
+| [2017-12-31] | v0.3    | Updated info for Epoch 1.0.6.2 [tbbmalloc (x86) Intel TBB 2018 Update 2]                                        |
 
 ---
 
@@ -566,3 +572,5 @@ Root path is autodiscovered on init and stored into **`EXTDBROOT`** variable. If
 [server_fncs]: arma_server_root/@DayZ_Epoch_Server/addons/dayz_server/init/server_functions.sqf "Go to source"
 [stored-procedure]: SQL/new_addon_test_procedure.sql "Go to source"
 [vgcompiles]: arma_server_root/@DayZ_Epoch_Server/addons/dayz_server/compile/garage/ "Go to source"
+[epochrelease]: https://github.com/EpochModTeam/DayZ-Epoch/releases/tag/1.0.6.2 "Go to source"
+[tbbmallocchanges]: https://bitbucket.org/torndeco/extdb3/wiki/extDB3%20-%20Changes%20to%20tbbmalloc "Go to source"
