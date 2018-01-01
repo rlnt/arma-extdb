@@ -55,9 +55,8 @@ _null = [1,"VGAR",(format ["deleteVehicle:%1",_id])] call EXTDB_fnc_APICall;
 // Switched to spawn so we can wait a bit for the ID
 [_uid,_characterID,_class,_dir,_location,_inventory,_hitpoints,_fuel,_damage,_colour,_colour2,_player] spawn {
    private ["_object","_uid","_characterID","_class","_inventory","_hitpoints","_fuel","_damage",
-   "_done","_retry","_key","_result","_outcome","_oid","_selection","_dam","_objWpnTypes",
-   "_objWpnQty","_isOK","_countr","_colour","_colour2","_clrinit","_clrinit2","_player",
-   "_clientID"];
+   "_done","_retry","_key","_result","_outcome","_oid","_selection","_dam",
+   "_colour","_colour2","_clrinit","_clrinit2","_player","_clientID"];
 
   // -------------------------------------------------------------------------
   _uid = _this select 0;
@@ -106,11 +105,8 @@ _null = [1,"VGAR",(format ["deleteVehicle:%1",_id])] call EXTDB_fnc_APICall;
   };
 
   // -------------------------------------------------------------------------
-  //_object = createVehicle [_class, _location, [], 0, "CAN_COLLIDE"];
-  // Don't use setPos or CAN_COLLIDE here. It will spawn inside other vehicles
   _object = _class createVehicle _location;
   if (surfaceIsWater _location && {({_x != _object} count (_location nearEntities ["Ship",8])) == 0}) then {
-    //createVehicle "NONE" is especially inaccurate in water
     _object setPos _location;
   };
 
@@ -125,37 +121,7 @@ _null = [1,"VGAR",(format ["deleteVehicle:%1",_id])] call EXTDB_fnc_APICall;
   _object setDamage _damage;
 
   // -------------------------------------------------------------------------
-   if (count _inventory > 0) then {
-    //Add weapons
-    _objWpnTypes = (_inventory select 0) select 0;
-    _objWpnQty = (_inventory select 0) select 1;
-    _countr = 0;
-    {
-      _isOK = isClass(configFile >> "CfgWeapons" >> _x);
-      if (_isOK) then {_object addWeaponCargoGlobal [_x,(_objWpnQty select _countr)];};
-      _countr = _countr + 1;
-    } count _objWpnTypes;
-
-    //Add Magazines
-    _objWpnTypes = (_inventory select 1) select 0;
-    _objWpnQty = (_inventory select 1) select 1;
-    _countr = 0;
-    {
-      _isOK = isClass(configFile >> "CfgMagazines" >> _x);
-      if (_isOK) then {_object addMagazineCargoGlobal [_x,(_objWpnQty select _countr)];};
-      _countr = _countr + 1;
-    } count _objWpnTypes;
-
-    //Add Backpacks
-    _objWpnTypes = (_inventory select 2) select 0;
-    _objWpnQty = (_inventory select 2) select 1;
-    _countr = 0;
-    {
-      _isOK = isClass(configFile >> "CfgVehicles" >> _x);
-      if (_isOK) then {_object addBackpackCargoGlobal [_x,(_objWpnQty select _countr)];};
-      _countr = _countr + 1;
-    } count _objWpnTypes;
-  };
+  [_inventory select 0,_inventory select 1,_inventory select 2,_object] call fn_addCargo;
 
   // -------------------------------------------------------------------------
   _object setVariable ["ObjectID", _oid, true];
@@ -193,9 +159,8 @@ _null = [1,"VGAR",(format ["deleteVehicle:%1",_id])] call EXTDB_fnc_APICall;
   dayz_serverObjectMonitor set [count dayz_serverObjectMonitor,_object];
 
   _object call fnc_veh_ResetEH;
-  if (_class in vg_disableThermal) then {_object disableTIEquipment true;};
+  {if (_class isKindOf _x) exitWith {_object disableTIEquipment true;}} count vg_disableThermal;
 
-  // for non JIP users this should make sure everyone has eventhandlers for vehicles.
   PVDZE_veh_Init = _object;
   publicVariable "PVDZE_veh_Init";
 

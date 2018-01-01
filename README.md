@@ -4,7 +4,7 @@
 
 ---
 
-> **Distribution Last update [2017-12-31], v0.3 || extDB version: extDB3 [1032] ||** ([see changelog](#changelog))
+> **Distribution Last update [2018-01-01], v0.3.1 || extDB version: extDB3 [1032] ||** ([see changelog](#changelog))
 > **STATUS: WIP** (todo: readme, helper function introduction, reconnection string in case of connection failure, enhanced security model (randomize connection protocol ID's - storing to uiNamesapce...etc), debug console video tutorial(is anyone interested?))
 
 ---
@@ -550,6 +550,7 @@ Root path is autodiscovered on init and stored into **`EXTDBROOT`** variable. If
 | [2017-11-23] | v0.1    | Initial release                                                                                                 |
 | [2017-11-28] | v0.2    | Added debug src files;<br>TIP 01: 'Use power of stored root path'; TIP 02: 'Use debug options' - incl. examples |
 | [2017-12-31] | v0.3    | Updated info for Epoch 1.0.6.2 [tbbmalloc (x86) Intel TBB 2018 Update 2]                                        |
+| [2018-01-01] | v0.3.1  | Updated virtual garage serverside files to the latest Epoch 1.0.6.2                                             |
 
 ---
 
