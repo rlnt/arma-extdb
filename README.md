@@ -4,6 +4,10 @@
 
 ---
 
+**This addon is not my work. [iben][originalauthor] AKA @infobeny gave me permission to keep it available for the DayZ Epoch Community!**
+
+---
+
 > **Distribution Last update [2018-01-01], v0.3.1 || extDB version: extDB3 [1032] ||** ([see changelog](#changelog))
 > **STATUS: WIP** (todo: readme, helper function introduction, reconnection string in case of connection failure, enhanced security model (randomize connection protocol ID's - storing to uiNamesapce...etc), debug console video tutorial(is anyone interested?))
 
@@ -575,3 +579,4 @@ Root path is autodiscovered on init and stored into **`EXTDBROOT`** variable. If
 [vgcompiles]: arma_server_root/@DayZ_Epoch_Server/addons/dayz_server/compile/garage/ "Go to source"
 [epochrelease]: https://github.com/EpochModTeam/DayZ-Epoch/releases/tag/1.0.6.2 "Go to source"
 [tbbmallocchanges]: https://bitbucket.org/torndeco/extdb3/wiki/extDB3%20-%20Changes%20to%20tbbmalloc "Go to source"
+[originalauthor]: https://github.com/infobeny/ "Go to source"
